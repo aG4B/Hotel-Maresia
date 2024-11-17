@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#recuperar-senha-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;     width: 100%;
+}
+
+#recuperar-senha-container h1 {
+    margin-bottom: 20px;
+    color: #333; }
+
+#recuperar-senha-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#recuperar-senha-form input[type="email"],
+#recuperar-senha-form input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#recuperar-senha-form button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s; }
+
+#recuperar-senha-form button[type="submit"]:hover {
+    background-color: #555; }
+
+#voltar-login {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    display: block;
+    margin-top: 20px; }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Colaborador</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/colaborador.css">
+</head>
+<body>
+    
+    <header>
+        <h1>Área do Colaborador</h1>
+        <a href="./index.html" class="logout-button">Sair</a>
+    </header>
+
+    
+    <section id="reservas-list">
+        <h2>Reservas Pendentes</h2>
+        <ul id="lista-reservas">
+            
+        </ul>
+    </section>
+
+    <script>
+        
+        function carregarReservas() {
+            const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+            const lista = document.getElementById("lista-reservas");
+
+            
+            lista.innerHTML = '';
+
+            reservas.forEach((reserva, index) => {
+                const li = document.createElement("li");
+                li.classList.add("reserva-item");
+
+                li.innerHTML = `
+                    <div class="reserva-card">
+                        <p><strong>Nome:</strong> ${reserva.nome}</p>
+                        <p><strong>Quarto:</strong> ${reserva.quarto}</p>
+                        <p><strong>Data de Check-in:</strong> ${new Date(reserva.checkin).toLocaleString()}</p>
+                        <p><strong>Data de Check-out:</strong> ${new Date(reserva.checkout).toLocaleString()}</p>
+                        <p><strong>E-mail:</strong> ${reserva.email}</p>
+                        <p><strong>Telefone:</strong> ${reserva.telefone}</p>
+                        <button onclick="aceitarReserva(${index})">Aceitar</button>
+                        <button onclick="recusarReserva(${index})">Recusar</button>
+                    </div>
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        
+        function aceitarReserva(index) {
+            const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+            const reserva = reservas[index];
+
+            const assunto = "Reserva Aceita";
+            const mensagem = `Sua reserva foi aceita:\n\nQuarto: ${reserva.quarto}\nCheck-in: ${new Date(reserva.checkin).toLocaleString()}\nCheck-out: ${new Date(reserva.checkout).toLocaleString()}`;
+
+            enviarEmail(reserva, assunto, mensagem);
+
+            
+            reservas.splice(index, 1);
+            localStorage.setItem("reservas", JSON.stringify(reservas));
+
+            
+            carregarReservas();
+        }
+
+       
+        function recusarReserva(index) {
+            const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+            const reserva = reservas[index];
+
+            const assunto = "Reserva Recusada";
+            const mensagem = `Sua reserva foi recusada:\n\nMotivo: Não há vagas disponíveis no momento.`;
+
+            enviarEmail(reserva, assunto, mensagem);
+
+            
+            reservas.splice(index, 1);
+            localStorage.setItem("reservas", JSON.stringify(reservas));
+
+            
+            carregarReservas();
+        }
+
+        
+        function enviarEmail(reserva, assunto, mensagem) {
+    const payload = {
+        nome: reserva.nome,
+        email: reserva.email,
+        assunto: assunto,
+        quarto: reserva.quarto,
+        checkin: new Date(reserva.checkin).toLocaleString(),
+        checkout: new Date(reserva.checkout).toLocaleString(),
+        inclusoes: reserva.inclusoes || 'Café da manhã',
+        metodo_pagamento: reserva.metodo_pagamento || 'Dinheiro'
+    };
+
+    fetch('http://127.0.0.1:5000/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("E-mail enviado com sucesso!");
+        } else {
+            return response.json().then(data => { throw new Error(data.error); });
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao enviar o e-mail:', error);
+        alert("Ocorreu um erro ao enviar o e-mail.");
+    });
+}
+
+
+        
+        carregarReservas();
+    </script>
+</body>
+</html>

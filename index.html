@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maresia Hotel - Login</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/botaofinal.css">
+    <link rel="stylesheet" href="./css/botaonavbarr.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    
+    <div id="login-container">
+        <div class="logo">
+            
+            <img src="./img/logo2.png" alt="Logo do Hotel">
+        </div>
+        <h1>Bem-vindo ao Maresia Hotel</h1>
+
+        
+        <div class="button-container">
+            
+            <button id="colaborador-btn" onclick="accessColaborador()">Área do Colaborador</button>
+            
+            <button onclick="window.location.href='./reserva.html'">Reserve Aqui</button>
+        </div>
+    </div>
+
+    
+    <nav>
+        <ul>
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Reservas</a></li>
+        </ul>
+    </nav>
+
+    
+    <section id="recursos">
+        <h2>Recursos e Benefícios</h2>
+        <p>Descubra por que o Maresia Hotel é a melhor escolha para a sua próxima estadia:</p>
+        <ul>
+            <li>Localização privilegiada</li>
+            <li>Quartos luxuosos</li>
+            <li>Atendimento excepcional</li>
+            <li>Bom custo-benefício</li>
+            <li>Vista para o mar</li>
+            <li>Pacotes de hospedagem personalizados</li>
+        </ul>
+    </section>
+
+    
+    <section id="imagens">
+        <h2>Descubra o Nosso Hotel</h2>
+        <div class="gallery">
+            <img src="./img/hotel1.png" alt="Imagem 1">
+            <img src="./img/hotel2.png" alt="Imagem 2">
+            <img src="./img/hotel3.png" alt="Imagem 3">
+        </div>
+    </section>
+
+    
+    <section id="testemunhos">
+        <h2>O que os nossos clientes dizem</h2>
+        <div class="testimonial">
+            <blockquote>
+                "Excelente serviço e acomodações de primeira classe. Mal posso esperar para voltar!"
+            </blockquote>
+            <p>- João Silva</p>
+        </div>
+        <div class="testimonial">
+            <blockquote>
+                "Adorei a estadia no Maresias Hotel. Equipe super atenciosa e quartos impecáveis."
+            </blockquote>
+            <p>- Maria Oliveira</p>
+        </div>
+    </section>
+
+    
+    <section id="redes-sociais">
+        <h2>Siga-nos nas Redes Sociais</h2>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </section>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/senha.js"></script>
+    <script>
+        
+        function accessColaborador() {
+            const password = prompt("Digite a senha de acesso:");
+            if (password === "12345") {
+                window.location.href = "./colaborador.html";
+            } else {
+                alert("Senha incorreta! Tente novamente.");
+            }
+        }
+    </script>
+</body>
+</html>
